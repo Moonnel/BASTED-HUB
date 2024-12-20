@@ -1,0 +1,157 @@
+local UserInputService = game:GetService("UserInputService")
+
+-- GUI Elements
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+local ContentFrame = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local BackButton = Instance.new("TextButton")
+local InfoLabel = Instance.new("TextLabel") -- Label para mostrar mensagens de aviso
+
+-- Categories Buttons
+local StyleButton = Instance.new("TextButton")
+local WeaponButton = Instance.new("TextButton")
+local SwordButton = Instance.new("TextButton")
+local StockButton = Instance.new("TextButton")
+
+-- GUI Properties
+ScreenGui.Name = "ShopGui"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BorderSizePixel = 1
+MainFrame.Size = UDim2.new(0, 400, 0, 500)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = MainFrame
+TitleLabel.Text = "Shop"
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.TextSize = 16
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Size = UDim2.new(1, 0, 0, 30)
+
+-- Close Button
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.Text = "X"
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 14
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 0)
+
+-- Back Button (for returning to the main menu)
+BackButton.Name = "BackButton"
+BackButton.Parent = MainFrame
+BackButton.Text = "Back"
+BackButton.Font = Enum.Font.GothamBold
+BackButton.TextSize = 14
+BackButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BackButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+BackButton.Size = UDim2.new(0, 80, 0, 30)
+BackButton.Position = UDim2.new(0, 10, 1, -40)
+
+-- Content Frame
+ContentFrame.Name = "ContentFrame"
+ContentFrame.Parent = MainFrame
+ContentFrame.BackgroundTransparency = 1
+ContentFrame.Size = UDim2.new(1, 0, 1, -60)
+ContentFrame.Position = UDim2.new(0, 0, 0, 30)
+
+-- Info Label (to show the info messages)
+InfoLabel.Name = "InfoLabel"
+InfoLabel.Parent = MainFrame
+InfoLabel.Text = ""
+InfoLabel.Font = Enum.Font.GothamBold
+InfoLabel.TextSize = 14
+InfoLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+InfoLabel.BackgroundTransparency = 1
+InfoLabel.Size = UDim2.new(1, 0, 0, 20)
+InfoLabel.Position = UDim2.new(0, 0, 0, 0)
+
+-- UI List Layout
+UIListLayout.Parent = ContentFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 10)
+
+-- Category Buttons
+StyleButton.Text = "Fighting Styles"
+StyleButton.Size = UDim2.new(1, 0, 0, 40)
+StyleButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+StyleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StyleButton.Font = Enum.Font.Gotham
+StyleButton.TextSize = 14
+
+WeaponButton.Text = "Weapons"
+WeaponButton.Size = UDim2.new(1, 0, 0, 40)
+WeaponButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+WeaponButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+WeaponButton.Font = Enum.Font.Gotham
+WeaponButton.TextSize = 14
+
+SwordButton.Text = "Swords"
+SwordButton.Size = UDim2.new(1, 0, 0, 40)
+SwordButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+SwordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SwordButton.Font = Enum.Font.Gotham
+SwordButton.TextSize = 14
+
+StockButton.Text = "Stock"
+StockButton.Size = UDim2.new(1, 0, 0, 40)
+StockButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+StockButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+StockButton.Font = Enum.Font.Gotham
+StockButton.TextSize = 14
+
+-- Adding buttons to the ContentFrame
+StyleButton.Parent = ContentFrame
+WeaponButton.Parent = ContentFrame
+SwordButton.Parent = ContentFrame
+StockButton.Parent = ContentFrame
+
+-- Functionality for buttons
+StyleButton.MouseButton1Click:Connect(function()
+    InfoLabel.Text = "" -- Clear any previous messages
+    -- Here, the code to display available fighting styles and equip them would go.
+    print("Displaying Fighting Styles...") -- Placeholder
+end)
+
+WeaponButton.MouseButton1Click:Connect(function()
+    InfoLabel.Text = "" -- Clear any previous messages
+    -- Display and equip weapons logic goes here.
+    print("Displaying Weapons...") -- Placeholder
+end)
+
+SwordButton.MouseButton1Click:Connect(function()
+    InfoLabel.Text = "" -- Clear any previous messages
+    -- Display and equip swords logic goes here.
+    print("Displaying Swords...") -- Placeholder
+end)
+
+StockButton.MouseButton1Click:Connect(function()
+    InfoLabel.Text = "" -- Clear any previous messages
+    -- Show the stock UI here (Stock Normal or Mirage Stock).
+    print("Displaying Stock...") -- Placeholder
+end)
+
+-- Back Button Logic
+BackButton.MouseButton1Click:Connect(function()
+    print("Going back to main shop...")
+    -- Code to go back to the main shop UI goes here
+    InfoLabel.Text = "" -- Clear any previous messages
+    -- Add an animation or fade-out here for the transition (optional)
+end)
+
+-- Close Button Logic
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
