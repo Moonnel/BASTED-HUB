@@ -1,0 +1,160 @@
+-- Referências para os componentes da GUI
+local UserInputService = game:GetService("UserInputService")
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local CloseButton = Instance.new("TextButton")
+local BoatButton = Instance.new("TextButton")
+local FlyButton = Instance.new("TextButton")
+local MovButton = Instance.new("TextButton")
+local SpeedBarBoat = Instance.new("Slider") -- Barra de velocidade do barco
+local SpeedBarFly = Instance.new("Slider") -- Barra de velocidade da fruta voadora
+local SpeedBarMov = Instance.new("Slider") -- Barra de velocidade da transformação da fruta
+
+-- GUI Properties
+ScreenGui.Name = "MiscGui"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BorderSizePixel = 1
+MainFrame.Size = UDim2.new(0, 400, 0, 400)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -200)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = MainFrame
+TitleLabel.Text = "Miscellaneous Options"
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.TextSize = 16
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Size = UDim2.new(1, 0, 0, 30)
+
+-- Close Button
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.Text = "X"
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 14
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 0)
+
+-- Button for Boat Speed (Misc Boats)
+BoatButton.Text = "Misc Boats"
+BoatButton.Size = UDim2.new(1, 0, 0, 40)
+BoatButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+BoatButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BoatButton.Font = Enum.Font.Gotham
+BoatButton.TextSize = 14
+BoatButton.Parent = MainFrame
+BoatButton.Position = UDim2.new(0, 0, 0, 40)
+
+-- Button for Fly Speed (Misc Fly)
+FlyButton.Text = "Misc Fly"
+FlyButton.Size = UDim2.new(1, 0, 0, 40)
+FlyButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+FlyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+FlyButton.Font = Enum.Font.Gotham
+FlyButton.TextSize = 14
+FlyButton.Parent = MainFrame
+FlyButton.Position = UDim2.new(0, 0, 0, 80)
+
+-- Button for Mov Speed (Misc Mov)
+MovButton.Text = "Misc Mov"
+MovButton.Size = UDim2.new(1, 0, 0, 40)
+MovButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+MovButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MovButton.Font = Enum.Font.Gotham
+MovButton.TextSize = 14
+MovButton.Parent = MainFrame
+MovButton.Position = UDim2.new(0, 0, 0, 120)
+
+-- Create Speed Slider for Boat
+SpeedBarBoat.Name = "SpeedBarBoat"
+SpeedBarBoat.Parent = MainFrame
+SpeedBarBoat.Min = 1
+SpeedBarBoat.Max = 500
+SpeedBarBoat.Value = 1
+SpeedBarBoat.Visible = false
+SpeedBarBoat.Position = UDim2.new(0, 10, 0, 160)
+SpeedBarBoat.Size = UDim2.new(0, 380, 0, 20)
+
+-- Create Speed Slider for Fly
+SpeedBarFly.Name = "SpeedBarFly"
+SpeedBarFly.Parent = MainFrame
+SpeedBarFly.Min = 1
+SpeedBarFly.Max = 500
+SpeedBarFly.Value = 1
+SpeedBarFly.Visible = false
+SpeedBarFly.Position = UDim2.new(0, 10, 0, 200)
+SpeedBarFly.Size = UDim2.new(0, 380, 0, 20)
+
+-- Create Speed Slider for Mov
+SpeedBarMov.Name = "SpeedBarMov"
+SpeedBarMov.Parent = MainFrame
+SpeedBarMov.Min = 1
+SpeedBarMov.Max = 500
+SpeedBarMov.Value = 1
+SpeedBarMov.Visible = false
+SpeedBarMov.Position = UDim2.new(0, 10, 0, 240)
+SpeedBarMov.Size = UDim2.new(0, 380, 0, 20)
+
+-- Show and Hide Speed Sliders based on Button Clicks
+BoatButton.MouseButton1Click:Connect(function()
+    SpeedBarBoat.Visible = not SpeedBarBoat.Visible
+    if SpeedBarFly.Visible then
+        SpeedBarFly.Visible = false
+    end
+    if SpeedBarMov.Visible then
+        SpeedBarMov.Visible = false
+    end
+end)
+
+FlyButton.MouseButton1Click:Connect(function()
+    SpeedBarFly.Visible = not SpeedBarFly.Visible
+    if SpeedBarBoat.Visible then
+        SpeedBarBoat.Visible = false
+    end
+    if SpeedBarMov.Visible then
+        SpeedBarMov.Visible = false
+    end
+end)
+
+MovButton.MouseButton1Click:Connect(function()
+    SpeedBarMov.Visible = not SpeedBarMov.Visible
+    if SpeedBarBoat.Visible then
+        SpeedBarBoat.Visible = false
+    end
+    if SpeedBarFly.Visible then
+        SpeedBarFly.Visible = false
+    end
+end)
+
+-- Close Button Logic
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Functionality for Speed Changes (Adjusting boat speed, fly speed, and movement speed)
+SpeedBarBoat.Changed:Connect(function()
+    local boatSpeed = SpeedBarBoat.Value
+    -- Apply the boat speed change to the player's boat speed here (logic depending on seu jogo)
+    print("Boat Speed: " .. boatSpeed)
+end)
+
+SpeedBarFly.Changed:Connect(function()
+    local flySpeed = SpeedBarFly.Value
+    -- Apply the fly speed change to the player's fruit flying ability here (logic dependendo do seu jogo)
+    print("Fly Speed: " .. flySpeed)
+end)
+
+SpeedBarMov.Changed:Connect(function()
+    local movSpeed = SpeedBarMov.Value
+    -- Apply the movement speed change to the player's fruit movement ability here (logic depending on seu jogo)
+    print("Movement Speed: " .. movSpeed)
+end)
