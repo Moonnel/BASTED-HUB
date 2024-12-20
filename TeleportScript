@@ -1,0 +1,189 @@
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- GUI Elements
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local TopBar = Instance.new("Frame")
+local TitleLabel = Instance.new("TextLabel")
+local MinimizeButton = Instance.new("TextButton")
+local CloseButton = Instance.new("TextButton")
+local BackButton = Instance.new("TextButton")
+local ContentFrame = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+
+-- GUI Properties
+ScreenGui.Name = "TeleportHub"
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BorderColor3 = Color3.fromRGB(70, 70, 70)
+MainFrame.BorderSizePixel = 1
+MainFrame.Size = UDim2.new(0, 400, 0, 500)
+MainFrame.Position = UDim2.new(0.5, -200, 0.5, -250)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+-- Top Bar (Para movimentação e botões)
+TopBar.Name = "TopBar"
+TopBar.Parent = MainFrame
+TopBar.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+TopBar.Size = UDim2.new(1, 0, 0, 30)
+
+TitleLabel.Name = "TitleLabel"
+TitleLabel.Parent = TopBar
+TitleLabel.Text = "Teleport Hub"
+TitleLabel.Font = Enum.Font.GothamBold
+TitleLabel.TextSize = 16
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Size = UDim2.new(0.8, 0, 1, 0)
+TitleLabel.Position = UDim2.new(0, 10, 0, 0)
+
+-- Minimize Button
+MinimizeButton.Name = "MinimizeButton"
+MinimizeButton.Parent = TopBar
+MinimizeButton.Text = "_"
+MinimizeButton.Font = Enum.Font.GothamBold
+MinimizeButton.TextSize = 14
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(1, -70, 0, 0)
+
+-- Close Button
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = TopBar
+CloseButton.Text = "X"
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.TextSize = 14
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 0)
+
+-- Back Button (Voltar para a GUI principal)
+BackButton.Name = "BackButton"
+BackButton.Parent = TopBar
+BackButton.Text = "<"
+BackButton.Font = Enum.Font.GothamBold
+BackButton.TextSize = 14
+BackButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BackButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+BackButton.Size = UDim2.new(0, 30, 0, 30)
+BackButton.Position = UDim2.new(0, 10, 0, 0)
+
+-- Content Frame (Onde os botões de teleporte serão exibidos)
+ContentFrame.Name = "ContentFrame"
+ContentFrame.Parent = MainFrame
+ContentFrame.BackgroundTransparency = 1
+ContentFrame.Size = UDim2.new(1, 0, 1, -30)
+ContentFrame.Position = UDim2.new(0, 0, 0, 30)
+
+-- UI List Layout
+UIListLayout.Parent = ContentFrame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 10)
+
+-- Função para mostrar o teleporte para ilhas
+local function teleportToIsland(islandName)
+    -- Lógica de teletransporte para a ilha
+    print("Teleportando para a ilha: " .. islandName)
+end
+
+-- Função para escanear e teletransportar para uma ilha especial
+local function specialTeleport()
+    -- Lógica para escanear se alguma ilha especial está ativa
+    print("Verificando se há alguma ilha especial ativa...")
+end
+
+-- Função para teletransportar para outro jogador
+local function teleportToPlayer(playerName)
+    -- Lógica de teletransporte para o jogador selecionado
+    print("Teleportando para o jogador: " .. playerName)
+end
+
+-- Função para adicionar os botões de teleporte
+local function createTeleportButtons()
+    local islands = {"Island1", "Island2", "Island3", "Island4"} -- Exemplo de ilhas
+    local players = {"Player1", "Player2", "Player3", "Player4"} -- Exemplo de jogadores
+
+    -- Botão de Teleporte para Ilhas
+    for _, island in ipairs(islands) do
+        local Button = Instance.new("TextButton")
+        Button.Name = island
+        Button.Parent = ContentFrame
+        Button.Text = "Teleportar para " .. island
+        Button.Size = UDim2.new(1, 0, 0, 40)
+        Button.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+        Button.Font = Enum.Font.Gotham
+        Button.TextSize = 14
+        Button.MouseButton1Click:Connect(function()
+            teleportToIsland(island)
+        end)
+    end
+
+    -- Botão de Teleporte Especial
+    local SpecialButton = Instance.new("TextButton")
+    SpecialButton.Name = "SpecialTeleport"
+    SpecialButton.Parent = ContentFrame
+    SpecialButton.Text = "Especial Teleporte"
+    SpecialButton.Size = UDim2.new(1, 0, 0, 40)
+    SpecialButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    SpecialButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    SpecialButton.Font = Enum.Font.Gotham
+    SpecialButton.TextSize = 14
+    SpecialButton.MouseButton1Click:Connect(function()
+        specialTeleport()
+    end)
+
+    -- Botão de Teleporte para Jogadores
+    for _, player in ipairs(players) do
+        local PlayerButton = Instance.new("TextButton")
+        PlayerButton.Name = player
+        PlayerButton.Parent = ContentFrame
+        PlayerButton.Text = "Teleportar para " .. player
+        PlayerButton.Size = UDim2.new(1, 0, 0, 40)
+        PlayerButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        PlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        PlayerButton.Font = Enum.Font.Gotham
+        PlayerButton.TextSize = 14
+        PlayerButton.MouseButton1Click:Connect(function()
+            teleportToPlayer(player)
+        end)
+    end
+end
+
+-- Chama a função para adicionar os botões de teleporte
+createTeleportButtons()
+
+-- Minimize Functionality
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    if minimized then
+        MainFrame.Size = UDim2.new(0, 400, 0, 500)
+        ContentFrame.Visible = true
+        MinimizeButton.Text = "_"
+        minimized = false
+    else
+        MainFrame.Size = UDim2.new(0, 400, 0, 30)
+        ContentFrame.Visible = false
+        MinimizeButton.Text = "+"
+        minimized = true
+    end
+end)
+
+-- Close Functionality
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Back Button (Retornar à GUI principal)
+BackButton.MouseButton1Click:Connect(function()
+    -- Aqui você deve esconder a tela atual e exibir a tela principal novamente
+    print("Voltando para a GUI principal...")
+    -- Você pode esconder esta GUI ou mudar para a tela principal, dependendo de como você deseja organizar.
+end)
